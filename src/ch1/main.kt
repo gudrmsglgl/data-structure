@@ -2,11 +2,23 @@ import ch1.LinkedList
 
 fun main() {
     val linkedList = LinkedList<String>()
-    linkedList.add("1")
-    linkedList.add("2")
-    linkedList.add("3")
-    linkedList.add("4")
-    linkedList.add("5")
+    with(linkedList) {
+        add("1")
+        add("2")
+        add("3")
+        add("4")
+        add("5")
 
-    linkedList.printAll()
+        printAll()
+
+        clear()
+        printAll()
+
+        println("새로운 데이터 추가 시작")
+        add("value1")
+        add("value2")
+
+        printAll()
+    }
+
 }

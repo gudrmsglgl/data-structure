@@ -15,6 +15,6 @@ class Node<T> private constructor(val data: T) {
     }
 
     override fun toString(): String {
-        return "ch1.Node [data: $data, next: $next]"
+        return "Node [data: $data, next: $next]"
     }
 }

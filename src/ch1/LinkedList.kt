@@ -31,23 +31,13 @@ class LinkedList<T> {
             }
         )
 
-        /*(0..size).forEach { index ->
-            if (index == 0) {
-                pointerHead = _head
-            }
+    }
 
-            if (index == size) {
-                val nextNode = ch1.Node.createNode(param)
-                println("nextNode: $nextNode")
-                pointerHead = nextNode
-                beforeHead?.linkNextNode(pointerHead!!)
-                size++
-                return
-            }
-            beforeHead = pointerHead
-            pointerHead = pointerHead?.next
-        }*/
-
+    fun clear() {
+        println("링크드리스트 데이터 클리어!!!")
+        _head = null
+        size = 0
+        println()
     }
 
     fun printAll() {
