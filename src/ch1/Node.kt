@@ -8,6 +8,8 @@ class Node<T> private constructor(val data: T) {
         next = param
     }
 
+    fun hasNextNode(): Boolean = next != null
+
     companion object {
         fun <T>createNode(param: T): Node<T> {
             return Node(param)
