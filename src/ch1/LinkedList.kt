@@ -45,13 +45,23 @@ class LinkedList<T> {
             val currentHeadNode = _head
             val newNode = Node.createNode(param)
             newNode.linkNextNode(currentHeadNode!!)
-            changeHeadNode(newNode)
+            size++
             return
         }
-
-
-        var pointerHead: Node<T>? = null
-        var beforeHead: Node<T>? = null
+        if (index == size) {
+            var currentHead: Node<T>? = _head
+            (0 until size).forEach { idx ->
+                if (currentHead?.hasNextNode().nonNull()) {
+                    currentHead = currentHead?.next
+                }
+                if (idx == size.minus(1)) {
+                    val newNode = Node.createNode(param)
+                    currentHead?.linkNextNode(newNode)
+                    size++
+                    return
+                }
+            }
+        }
 
 
     }
@@ -78,10 +88,6 @@ class LinkedList<T> {
 
     private fun createHeadNode(param: T) {
         _head = Node.createNode(param)
-    }
-
-    private fun changeHeadNode(param: Node<T>) {
-        _head = param
     }
 
 }

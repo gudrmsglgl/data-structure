@@ -15,8 +15,10 @@ fun main() {
         printAll()
 
         println("새로운 데이터 추가 시작")
-        add("value1")
-        add("value2")
+        add(0, "value1")
+        add( "value2")
+        add( 2,"value3")
+
 
         printAll()
     }
