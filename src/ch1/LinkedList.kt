@@ -62,7 +62,20 @@ class LinkedList<T> {
                 }
             }
         }
-
+        var currentHead = _head
+        var originIndexHead: Node<T>? = null
+        (0 until size).forEach { idx ->
+            if (index.minus(1) != idx && currentHead?.hasNextNode().nonNull()) {
+                currentHead = currentHead?.next
+                originIndexHead = currentHead?.next
+                return@forEach
+            }
+            val newNode = Node.createNode(param)
+            newNode.linkNextNode(originIndexHead!!)
+            currentHead?.linkNextNode(newNode)
+            size++
+            return
+        }
 
     }
 
