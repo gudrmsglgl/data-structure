@@ -79,6 +79,15 @@ class LinkedList<T> {
 
     }
 
+    // 0. 범위를 벗어난 index 에 대한 throw 처리
+    // 1. 첫 번째 아이템을 지울 경우 > ?
+    // 2. 맨 마지막 아이템을 지울 경우 > 마지막 인덱스 전.next = null
+    // 3. size 만큼 아이템을 이동하면서 해당 인덱스에 해당하는 아이템을 찾는다.
+    // 4. 지우는아이템.next 를 지우는아이템-1.next 에 연결시켜준다.
+    fun removeAt(index: Int) {
+
+    }
+
 
     fun clear() {
         println("링크드리스트 데이터 클리어!!!")
