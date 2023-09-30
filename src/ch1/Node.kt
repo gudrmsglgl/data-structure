@@ -1,10 +1,10 @@
 package ch1
 
-class Node<T> private constructor(val data: T) {
+class Node<T> private constructor(private val data: T) {
     var next: Node<T>? = null
         private set
 
-    fun linkNextNode(param: Node<T>) {
+    fun linkNextNode(param: Node<T>?) {
         next = param
     }
 

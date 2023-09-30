@@ -9,7 +9,6 @@ class LinkedList<T> {
     fun add(param:T) {
         if (_head == null) {
             createHeadNode(param)
-            size++
             return
         }
 
@@ -36,45 +35,28 @@ class LinkedList<T> {
 
     fun add(index: Int, param: T) {
         if (index < 0 || index > size) throw IndexOutOfBoundsException("LinkedList 인덱스($index)가 사이즈(${size})를 넘었습니다.")
-        if (index == 0 && _head == null) {
-            createHeadNode(param)
+
+        val newNode = Node.createNode(param)
+
+        if (index == 0) {
+            newNode.linkNextNode(_head)
+            _head = newNode
             size++
             return
         }
-        if (index == 0 && _head != null) {
-            val currentHeadNode = _head
-            val newNode = Node.createNode(param)
-            newNode.linkNextNode(currentHeadNode!!)
-            size++
-            return
-        }
-        if (index == size) {
-            var currentHead: Node<T>? = _head
-            (0 until size).forEach { idx ->
-                if (currentHead?.hasNextNode().nonNull()) {
-                    currentHead = currentHead?.next
-                }
-                if (idx == size.minus(1)) {
-                    val newNode = Node.createNode(param)
-                    currentHead?.linkNextNode(newNode)
-                    size++
-                    return
-                }
+
+        var currentNode: Node<T>? = _head
+
+        (0 .. size).forEachIndexed { currentIndex, i ->
+            if (currentIndex == index -1) {
+                newNode.linkNextNode(currentNode?.next)
+                currentNode?.linkNextNode(newNode)
+                size++
+                return@forEachIndexed
             }
-        }
-        var currentHead = _head
-        var originIndexHead: Node<T>? = null
-        (0 until size).forEach { idx ->
-            if (index.minus(1) != idx && currentHead?.hasNextNode().nonNull()) {
-                currentHead = currentHead?.next
-                originIndexHead = currentHead?.next
-                return@forEach
+            if (currentNode?.hasNextNode().nonNull()) {
+                currentNode = currentNode?.next
             }
-            val newNode = Node.createNode(param)
-            newNode.linkNextNode(originIndexHead!!)
-            currentHead?.linkNextNode(newNode)
-            size++
-            return
         }
 
     }
@@ -110,6 +92,6 @@ class LinkedList<T> {
 
     private fun createHeadNode(param: T) {
         _head = Node.createNode(param)
+        size++
     }
-
 }
