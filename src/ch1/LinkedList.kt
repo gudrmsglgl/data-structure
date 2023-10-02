@@ -6,31 +6,22 @@ class LinkedList<T> {
     private var _head: Node<T>? = null
     private var size: Int = 0
 
-    fun add(param:T) {
-        if (_head == null) {
-            createHeadNode(param)
+    fun add(param: T) {
+        val newNode = Node.createNode(param)
+
+        if (_head == null && size == 0) {
+            _head = newNode
+            size ++
             return
         }
 
-        var currentHead: Node<T>? = null
-
-        (0 until size).forEach { index ->
-            if (index == 0) {
-                currentHead = _head
-            }
-
-            if (index == size.minus(1)) {
-                val newNode = Node.createNode(param)
-                currentHead?.linkNextNode(newNode)
-                size++
-                return@forEach
-            }
-
-            if (currentHead?.hasNextNode().nonNull()) {
-                currentHead = currentHead?.next
-            }
+        var currentNode = _head
+        while (currentNode?.hasNextNode().nonNull()) {
+            currentNode = currentNode?.next
         }
 
+        currentNode?.linkNextNode(newNode)
+        size++
     }
 
     fun add(index: Int, param: T) {
@@ -47,12 +38,12 @@ class LinkedList<T> {
 
         var currentNode: Node<T>? = _head
 
-        (0 .. size).forEachIndexed { currentIndex, i ->
+        (0 .. size).forEach { currentIndex ->
             if (currentIndex == index -1) {
                 newNode.linkNextNode(currentNode?.next)
                 currentNode?.linkNextNode(newNode)
                 size++
-                return@forEachIndexed
+                return@forEach
             }
             if (currentNode?.hasNextNode().nonNull()) {
                 currentNode = currentNode?.next
