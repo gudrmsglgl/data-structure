@@ -25,7 +25,8 @@ class LinkedList<T> {
     }
 
     fun add(index: Int, param: T) {
-        if (index < 0 || index > size) throw IndexOutOfBoundsException("LinkedList 인덱스($index)가 사이즈(${size})를 넘었습니다.")
+        if (index < 0 || index > size)
+            throw IndexOutOfBoundsException("LinkedList 인덱스($index)가 사이즈(${size})를 넘었습니다.")
 
         val newNode = Node.createNode(param)
 
@@ -52,13 +53,34 @@ class LinkedList<T> {
 
     }
 
-    // 0. 범위를 벗어난 index 에 대한 throw 처리
-    // 1. 첫 번째 아이템을 지울 경우 > ?
-    // 2. 맨 마지막 아이템을 지울 경우 > 마지막 인덱스 전.next = null
-    // 3. size 만큼 아이템을 이동하면서 해당 인덱스에 해당하는 아이템을 찾는다.
-    // 4. 지우는아이템.next 를 지우는아이템-1.next 에 연결시켜준다.
     fun removeAt(index: Int) {
+        if (index < 0 || index > size)
+            throw IndexOutOfBoundsException("LinkedList remove 인덱스($index)가 사이즈(${size})를 넘었습니다.")
 
+        if (index == 0) {
+            _head = _head?.next
+            size--
+            return
+        }
+
+        var currentNode = _head
+
+        (0..size).forEach { currentIndex ->
+
+            if (currentIndex == index -1) {
+                val targetRemoveNode = currentNode?.next
+                currentNode?.linkNextNode(targetRemoveNode?.next)
+                size--
+            }
+
+            if (currentNode?.hasNextNode().nonNull()) {
+                currentNode = currentNode?.next
+            }
+        }
+    }
+
+    fun removeLast() {
+        removeAt(size -1)
     }
 
 
@@ -81,8 +103,4 @@ class LinkedList<T> {
         println()
     }
 
-    private fun createHeadNode(param: T) {
-        _head = Node.createNode(param)
-        size++
-    }
 }
