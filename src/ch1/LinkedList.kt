@@ -4,7 +4,8 @@ import util.nonNull
 
 class LinkedList<T> {
     private var _head: Node<T>? = null
-    private var size: Int = 0
+    var size: Int = 0
+        private set
 
     fun add(param: T) {
         val newNode = Node.createNode(param)
@@ -53,14 +54,15 @@ class LinkedList<T> {
 
     }
 
-    fun removeAt(index: Int) {
+    fun removeAt(index: Int): Node<T>? {
         if (index < 0 || index > size)
             throw IndexOutOfBoundsException("LinkedList remove 인덱스($index)가 사이즈(${size})를 넘었습니다.")
 
         if (index == 0) {
+            val targetRemoveNode = _head
             _head = _head?.next
             size--
-            return
+            return targetRemoveNode
         }
 
         var currentNode = _head
@@ -71,16 +73,35 @@ class LinkedList<T> {
                 val targetRemoveNode = currentNode?.next
                 currentNode?.linkNextNode(targetRemoveNode?.next)
                 size--
+                return targetRemoveNode
             }
 
             if (currentNode?.hasNextNode().nonNull()) {
                 currentNode = currentNode?.next
             }
         }
+        return null
     }
 
-    fun removeLast() {
-        removeAt(size -1)
+    fun removeLast(): Node<T>? {
+        return removeAt(size -1)
+    }
+
+    fun get(index: Int): Node<T>? {
+        if (index == 0) {
+            return _head
+        }
+
+        var currentNode = _head
+        (0 until size).forEach { currentIndex ->
+            if (currentIndex == index) {
+                return currentNode
+            }
+            if (currentNode?.hasNextNode().nonNull()) {
+                currentNode = currentNode?.next
+            }
+        }
+        return null
     }
 
 
