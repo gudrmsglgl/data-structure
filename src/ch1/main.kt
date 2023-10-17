@@ -1,7 +1,22 @@
+import ch1.DoublyLinkedList
 import ch1.LinkedList
 import ch1.Stack
 
 fun main() {
+    val doubleLinkedList = DoublyLinkedList<String>()
+    with(doubleLinkedList) {
+        add("item0")
+        add("item1")
+        add("item2")
+
+        add(0, "item3")
+        add(1, "item4")
+        add(5,  "item5")
+        printAll()
+    }
+}
+
+private fun singleListEx() {
     val linkedList = LinkedList<String>()
     with(linkedList) {
         println("새로운 데이터 추가 시작")
@@ -29,5 +44,4 @@ fun main() {
     println("pop(): ${stack.pop()}")
     println("pop(): ${stack.pop()}")
     println("peek(): ${stack.peek()}")
-
 }

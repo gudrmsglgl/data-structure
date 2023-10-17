@@ -4,8 +4,15 @@ class Node<T> private constructor(private val data: T) {
     var next: Node<T>? = null
         private set
 
+    var prev: Node<T>? = null
+        private set
+
     fun linkNextNode(param: Node<T>?) {
         next = param
+    }
+
+    fun linkPrevNode(param: Node<T>?) {
+        prev = param
     }
 
     fun hasNextNode(): Boolean = next != null
@@ -17,6 +24,6 @@ class Node<T> private constructor(private val data: T) {
     }
 
     override fun toString(): String {
-        return "Node [data: $data, next: $next]"
+        return "Node [data: $data]"
     }
 }
