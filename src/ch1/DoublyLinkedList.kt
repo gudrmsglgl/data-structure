@@ -6,6 +6,9 @@ class DoublyLinkedList<T> {
     private var _head: Node<T>? = null
     private var _tail: Node<T>? = null
 
+    val tail: Node<T>?
+        get() = _tail
+
     var size: Int = 0
         private set
 
@@ -37,12 +40,11 @@ class DoublyLinkedList<T> {
         if (index == 0) {
             newNode.linkNextNode(_head)
             _head?.linkPrevNode(newNode)
+            _head = newNode
 
             if (size == 0) {
                 _tail = _head
             }
-
-            _head = newNode
 
             size++
             return
@@ -52,7 +54,6 @@ class DoublyLinkedList<T> {
             _tail?.linkNextNode(newNode)
             newNode.linkPrevNode(_tail)
             _tail = newNode
-            println("index($index) == size> newNode: $newNode , tail:$_tail")
             size++
 
             return

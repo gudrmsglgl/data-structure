@@ -1,8 +1,28 @@
 import ch1.DoublyLinkedList
 import ch1.LinkedList
+import ch1.Queue
 import ch1.Stack
 
 fun main() {
+    queueEx()
+}
+
+private fun queueEx() {
+    val queue = Queue<String>()
+    with(queue) {
+        enqueue("item 1")
+        enqueue("item 2")
+        enqueue("item 3")
+        println("front: ${front()}")
+        println("dequeue: ${dequeue()}")
+        println("dequeue: ${dequeue()}")
+        println("dequeue: ${dequeue()}")
+        println("dequeue: ${dequeue()}")
+        println("isEmpty: ${isEmpty()}")
+    }
+}
+
+private fun doubleListEx() {
     val doubleLinkedList = DoublyLinkedList<String>()
     with(doubleLinkedList) {
         add("item0")

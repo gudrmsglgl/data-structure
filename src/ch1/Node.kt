@@ -1,6 +1,6 @@
 package ch1
 
-class Node<T> private constructor(private val data: T) {
+class Node<T> private constructor(val data: T) {
     var next: Node<T>? = null
         private set
 
