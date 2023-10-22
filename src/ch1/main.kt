@@ -12,6 +12,9 @@ fun main() {
         add(0, "item3")
         add(1, "item4")
         add(5,  "item5")
+
+        removeLast()
+        removeAt(1)
         printAll()
     }
 }
