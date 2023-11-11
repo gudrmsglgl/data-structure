@@ -1,6 +1,7 @@
 package ch1.hash
 
 import ch1.LinkedList
+import kotlin.math.absoluteValue
 
 class HashTable<T>(private val size: Int) {
     private val array: Array<LinkedList<HashData<T>>?> = arrayOfNulls(size)
@@ -36,6 +37,23 @@ class HashTable<T>(private val size: Int) {
         return null
     }
 
+    fun remove(key: String): T? {
+        val index = getIndex(key)
+        val list = array[index] ?: return null
+
+        for (i in 0 until list.size) {
+            val hashData = list.get(i)
+            if (hashData != null) {
+                val hashKey = hashData.data.key
+                if (key == hashKey) {
+                    val removeData = list.removeAt(i)
+                    return removeData?.data?.data
+                }
+            }
+        }
+        return null
+    }
+
     fun printAll() {
         array.forEachIndexed { index, linkedList ->
             println("index:$index")
@@ -45,7 +63,7 @@ class HashTable<T>(private val size: Int) {
 
 
     private fun getIndex(key: String): Int {
-        return key.hashCode() % size
+        return key.hashCode().absoluteValue % size
     }
 
     private fun generateEmptyList(index: Int): LinkedList<HashData<T>> {
